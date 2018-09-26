@@ -21,7 +21,8 @@ class AddComments extends Component {
     e.preventDefault()
     api.postComment( this.props.id, this.state.description )
       .then(res => {
-        this.props.onChange(this.state.description)
+        console.log(this.state.description)
+        this.props.onSubmit(this.state)
         this.setState({
           description:" "
         })

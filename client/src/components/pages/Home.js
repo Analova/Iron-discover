@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Map from "../Map"
 
 class Home extends Component {
 
@@ -7,7 +6,7 @@ class Home extends Component {
     return (
       <div className="Home">
         <h2>Find the best activities</h2>
-        {/* <Map/> */}
+        
       </div>
     );
   }

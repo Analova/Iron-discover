@@ -13,45 +13,58 @@ const errHandler = err => {
 export default {
   service: service,
 
-  getActivities(){
-  return service
-  .get("/activities")
-  .then(res=>res.data)
-  .catch(errHandler)
-  
-  },
-
-  postActivity(data){
-   return service
-   .post("/activities",data)
-   .then(res=>res.data)
-   .catch(errHandler)
-
-  },
-
-  profileActivity(id){
-    console.log("called from console")
-   return service
-   .get(`/activities/${id}`)
-   .then(res=>res.data)
-   .catch(errHandler)
-  },
-  
-  postComment(id,description){
+  getActivities() {
     return service
-      .post(`/activities/${id}/comments`, {description:description})
-      .then(res=>res.data)
+      .get("/activities")
+      .then(res => res.data)
+      .catch(errHandler)
+
+  },
+
+  postActivity(data) {
+    return service
+      .post("/activities", data)
+      .then(res => res.data)
+      .catch(errHandler)
+
+  },
+
+  profileActivity(id) {
+    console.log("called from console")
+    return service
+      .get(`/activities/${id}`)
+      .then(res => res.data)
       .catch(errHandler)
   },
 
-  editActivity(id){
+  postComment(id, description) {
     return service
-    .patch(`/activities/${id}`)
-    .then(res=>res.data)
-    .catch(errHandler)
-     },
+      .post(`/activities/${id}/comments`, { description: description })
+      .then(res => res.data)
+      .catch(errHandler)
+  },
 
-    // Sing up Log in
+  editActivity(id, data) {
+    return service
+      .patch(`/activities/${id}`, data)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  deleteActivity(id) {
+    return service
+      .delete("/activities/" + id)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+  deleteComment(id) {
+    return service
+      .delete("/comments/" + id)
+      .then(res => res.data)
+      .catch(errHandler);
+  },
+
+  // Sing up Log in
   signup(userInfo) {
     return service
       .post('/signup', userInfo)
@@ -73,11 +86,9 @@ export default {
   },
 
   logout() {
+    localStorage.removeItem('user')
     return service
       .get('/logout')
-      .then(res => {
-        localStorage.removeItem('user');
-      })
   },
 
   // loadUser() {

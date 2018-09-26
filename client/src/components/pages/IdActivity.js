@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import api from '../../api'
 import AddComments from "./AddComments"
 import { Link } from 'react-router-dom'
-import FormActivities from './FormActivities';
+
 
 class idActivity extends Component {
   constructor(props){
@@ -13,9 +13,25 @@ class idActivity extends Component {
     }
   }
 
-  handleOnChange(newComment){
-    this.setState({comments: [...this.state.comments,newComment ]})
+  
+
+  handleOnSubmit(newComment){
+    console.log("COMMENT", this.state.comments)
+    this.setState({comments: [...this.state.comments, newComment ]})
   }
+
+  handleDelete(id){
+    console.log("handleDelete")
+    api.deleteComment(id)
+    .then(data=>{
+      if(data.success){
+        this.setState({
+          comments:this.state.comments.filter(c=>c._id !== id)
+        })
+      }
+    })
+   
+    }
 
   render() {  
     console.log("STATE",this.state.comments)             
@@ -28,9 +44,11 @@ class idActivity extends Component {
         <p>Picture:<img src={this.state.activity.picture} style={{ height: 50, width: 50, objectFit: "cover" }}/ ></p>
         <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>
         
-      <AddComments onChange={e=> this.handleOnChange(e)} id={this.props.match.params.id} />
-       {this.state.comments.map((c)=> <p>{c.description}</p>)}
-      {/* <FormActivities/> */}
+      <AddComments onSubmit={e=> this.handleOnSubmit(e)} id={this.props.match.params.id} />
+       {this.state.comments.map((c)=> <p key={c._id}>{c.description}
+       <button onClick={e=>this.handleDelete(c._id)}>Delete</button>
+       </p>
+       )}
       </div>
     );
   }

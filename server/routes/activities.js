@@ -61,30 +61,32 @@ router.post("/:id/comments", isLoggedIn, (req,res,next)=>{
   .catch(err=>next(err))
   })
 
-  // Delete an activity
+  
+  
+  //Update
+    router.patch("/:id", (req,res)=>{
+      let{name,picture,description,category}=req.body
+      Activity.findByIdAndUpdate(req.params.id,{name,picture,description,category}, {new:true})
+      .then(activity=>{
+        res.json({
+          success:true,
+          activity
+        })
+      })
+      .catch(error=>{
+        return{
+          success:false,
+          error:err
+        }
+      })
+    })
+
+    // Delete an activity
   router.delete("/:id" , (req,res,next)=>{
     Activity.findByIdAndRemove(req.params.id)
     .then( ()=> {
       res.json({
         success: true,
-      })
-    })
-    .catch(error=>{
-      return{
-        success:false,
-        error:err
-      }
-    })
-  })
-  
-  //Update
-  router.patch("/:id", (req,res)=>{
-    let{name,picture,description,category}=req.body
-    Activity.findByIdAndUpdate(req.params.id,{name,picture,description,category}, {new:true})
-    .then(activity=>{
-      res.json({
-        success:true,
-        activity
       })
     })
     .catch(error=>{

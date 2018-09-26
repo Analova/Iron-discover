@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 import api from '../../api';
+import {
+  Button,
+  Form,
+  Col,
+  FormGroup,
+  Input,
+  Label,
+  FormText,
+} from 'reactstrap';
 
 
 
@@ -11,11 +20,11 @@ class AddActivity extends Component {
       category: "",
       picture: "",
       description: "",
-      
+
     }
-    
-    if(!api.isLoggedIn){
-     this.props.history.push("/")
+
+    if (!api.isLoggedIn) {
+      this.props.history.push("/")
     }
   }
 
@@ -52,14 +61,69 @@ class AddActivity extends Component {
   render() {
     return (
       <div className="AddCountry">
-        <h2>Add an activity</h2>
-        <form>
-          Name: <input type="text" value={this.state.name} onChange={(e) => { this.handleInputChange("name", e) }} /> <br />
-          Picture: <input type="text" value={this.state.picture} onChange={(e) => { this.handleInputChange("picture", e) }} /> <br />
-          Category: <input type="text" value={this.state.category} onChange={(e) => { this.handleInputChange("category", e) }} /> <br />
-          Description: <textarea value={this.state.description} cols="30" rows="10" onChange={(e) => { this.handleInputChange("description", e) }} ></textarea> <br />
-          <button onClick={(e) => this.handleClick(e)}>Create an activity</button>
-        </form>
+        <h1 className="text-center">Add an activity</h1>
+        <Form>
+          <FormGroup row>
+            <Label for="exampleName" sm={4}>Name</Label>
+            <Col sm={4}>
+              <Input
+                type="text"
+                value={this.state.name}
+                onChange={(e) => { this.handleInputChange("name", e) }}
+              />
+            </Col>
+          </FormGroup>
+
+          <FormGroup row>
+            <Label for="exampleName" sm={4}>Picture</Label>
+            <Col sm={4}>
+              <Input
+                type="text"
+                value={this.state.picture}
+                onChange={(e) => { this.handleInputChange("picture", e) }}
+              />
+            </Col>
+          </FormGroup>
+
+          <FormGroup row>
+            <Label for="exampleName" sm={4}>Category</Label>
+            <Col sm={4}>
+              <Input
+
+              />
+            </Col>
+          </FormGroup>
+
+          <FormGroup row>
+            <Label for="exampleName" sm={4}>Category</Label>
+            <Col sm={4}>
+              <Input
+                type="text"
+                value={this.state.category}
+                onChange={(e) => { this.handleInputChange("category", e) }}
+              />
+            </Col>
+          </FormGroup>
+
+
+          <FormGroup row>
+            <Label for="exampleText" sm={4}>Description</Label>
+            <Col sm={4}>
+              <Input
+                type="textarea"
+                name="motivation"
+                type="textarea"
+                value={this.state.description}
+                onChange={(e) => { this.handleInputChange("description", e) }}
+              />
+
+            </Col>
+          </FormGroup>
+          <Button color="primary" size="m" onClick={(e) => this.handleClick(e)}>
+            Submit
+          </Button>
+        </Form>
+
         <div style={{
           margin: 10,
           backgroundColor: "red",
