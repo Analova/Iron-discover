@@ -39,26 +39,33 @@ class Activities extends Component {
 
   }
 
+  handleClick(activityId) {
+    console.log(activityId);
+    this.props.history.push('/activity/' + activityId)
+
+  }
+
   render() {
     return (
-      <Container >
-        <h2>View all activities</h2>
+      <Container className="Activities">
+        <h2>What do you want to do today?</h2>
         <Search search={this.state.search} onChange={(e) => { this.setState({ search: e.target.value }) }} />
         <Row>
-          {this.state.activities.filter((el, i) => { return el.name.toUpperCase().indexOf(this.state.search.toUpperCase()) !== -1 }).map((c) =>
-            <Col sm="6">
-              <Card >
-                <CardImg top width="100%" src={c.picture} />
-                <CardBody>
-                  <CardSubtitle>Name:{c.name}</CardSubtitle>
-                  <CardSubtitle>Category:{c.category}</CardSubtitle>
-                  <CardText>Description:{c.description}</CardText>
-                  <Link color="primary" size="sm" to={`/activity/${c._id}`} activeClassName="current">View more </Link>
-                </CardBody>
-              </Card>
-              <br />
-            </Col>
-          )}
+          {this.state.activities
+            .filter((el, i) => el.name.toUpperCase().indexOf(this.state.search.toUpperCase()) !== -1)
+            .map(a =>
+              <Col sm="6" lg="4">
+                <Card onClick={e => this.handleClick(a._id)}>
+                  <CardImg top width="100%" src={a.picture} />
+                  <CardBody>
+                    <CardSubtitle>{a.name}</CardSubtitle>
+                    <CardText>{a.category}</CardText>
+                    {/* <CardText>{a.description}</CardText> */}
+                  </CardBody>
+                </Card>
+                <br />
+              </Col>
+            )}
         </Row>
       </Container>
 

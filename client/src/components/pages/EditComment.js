@@ -14,9 +14,6 @@ class FormActivities extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: "",
-      category: "",
-      picture: "",
       description: "",
 
     }
@@ -28,13 +25,10 @@ class FormActivities extends Component {
 
   componentDidMount() {
     api.profileActivity(this.props.match.params.id)
-      .then((activity) => {
-        console.log(activity)
+      .then((comment) => {
+        console.log(comment)
         this.setState({
-          name: activity.activity.name,
-          category: activity.activity.category,
-          picture: activity.activity.picture,
-          description: activity.activity.description,
+          description: comment.comment.description,
         })
       })
   }
@@ -49,19 +43,13 @@ class FormActivities extends Component {
   handleClick(e) {
     e.preventDefault()
     let data = {
-      name: this.state.name,
-      category: this.state.category,
-      picture: this.state.picture,
       description: this.state.description,
     }
-    api.editActivity(this.props.match.params.id, data)
+    api.editComment(this.props.match.params.id, data)
       .then(result => {
         console.log('SUCCESS!')
         this.setState({
-          name: "",
-          picture: "",
           description: "",
-          category: "",
         })
         this.props.history.push("/activities")
       })
@@ -72,47 +60,12 @@ class FormActivities extends Component {
   render() {
     return (
       <div className="AddCountry">
-        <h2>Edit an activity</h2>
-
-        <FormGroup row>
-          <Label for="exampleEmail" sm={4}>Name</Label>
-          <Col sm={4}>
-            <Input
-              type="text"
-              name="name"
-              value={this.state.name} onChange={(e) => { this.handleInputChange("name", e) }}
-            />
-          </Col>
-        </FormGroup>
-
-        <FormGroup row>
-          <Label for="exampleEmail" sm={4}>Picture</Label>
-          <Col sm={4}>
-            <Input
-              type="text"
-              name="picture"
-              value={this.state.picture} onChange={(e) => { this.handleInputChange("picture", e) }}
-            />
-          </Col>
-        </FormGroup>
-
-
-        <FormGroup row>
-          <Label for="exampleEmail" sm={4}>Category</Label>
-          <Col sm={4}>
-            <Input
-              type="text"
-              name="category"
-              value={this.state.category} onChange={(e) => { this.handleInputChange("category", e) }}
-            />
-          </Col>
-        </FormGroup>
+        <h2>Edit comment</h2>
 
         <FormGroup row>
           <Label for="exampleText" sm={4}>Description</Label>
           <Col sm={4}>
             <Input
-              name="motivation"
               type="textarea"
               value={this.state.description}
               onChange={(e) => { this.handleInputChange("description", e) }}
@@ -135,3 +88,5 @@ class FormActivities extends Component {
 }
 
 export default FormActivities;
+
+

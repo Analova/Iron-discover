@@ -7,8 +7,9 @@ import {
   Nav,
   NavItem,
   Container,
+  NavbarBrand,
 } from 'reactstrap';
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 
 export default class IronNavbar extends Component {
@@ -32,6 +33,7 @@ export default class IronNavbar extends Component {
     return (
       <Navbar className="IronNavbar" color="primary" dark expand="sm">
         <Container>
+          <NavbarBrand tag={Link} to="/">Discover</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

@@ -85,14 +85,7 @@ class AddActivity extends Component {
             </Col>
           </FormGroup>
 
-          <FormGroup row>
-            <Label for="exampleName" sm={4}>Category</Label>
-            <Col sm={4}>
-              <Input
 
-              />
-            </Col>
-          </FormGroup>
 
           <FormGroup row>
             <Label for="exampleName" sm={4}>Category</Label>

@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import api from '../../api';
+import {
+  Button,
+  Col,
+  FormGroup,
+  Input,
+  Label,
+} from 'reactstrap';
 
 class Login extends Component {
   constructor(props) {
@@ -21,7 +28,7 @@ class Login extends Component {
     api.login(this.state.username, this.state.password)
       .then(result => {
         console.log('SUCCESS!')
-        this.props.history.push("/") // Redirect to the home page
+        this.props.history.push("/activities") // Redirect to the home page
       })
       .catch(err => {
         console.log('ERROR')
@@ -32,11 +39,27 @@ class Login extends Component {
     return (
       <div className="Login">
         <h2>Login</h2>
-        <form>
-          Username: <input type="text" value={this.state.username} onChange={(e) => this.handleInputChange("username", e)} /> <br />
-          Password: <input type="password" value={this.state.password} onChange={(e) => this.handleInputChange("password", e)} /> <br />
-          <button onClick={(e) => this.handleClick(e)}>Login</button>
-        </form>
+        <FormGroup row>
+          <Label for="exampleName" sm={4}>Username</Label>
+          <Col sm={4}>
+            <Input
+              ype="text" value={this.state.username}
+              onChange={(e) => this.handleInputChange("username", e)}
+            />
+          </Col>
+        </FormGroup>
+
+        <FormGroup row>
+          <Label for="exampleName" sm={4}>Password</Label>
+          <Col sm={4}>
+            <Input
+              type="password" value={this.state.password}
+              onChange={(e) => this.handleInputChange("password", e)}
+            />
+          </Col>
+        </FormGroup>
+
+        <Button color="primary" onClick={(e) => this.handleClick(e)}>Login</Button>
       </div>
     );
   }

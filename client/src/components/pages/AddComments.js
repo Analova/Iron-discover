@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import api from '../../api'
-
+import {
+  Button,
+  Form,
+  Col,
+  FormGroup,
+  Input,
+  Label,
+  FormText,
+} from 'reactstrap';
 
 class AddComments extends Component {
   constructor(props) {
@@ -19,14 +27,14 @@ class AddComments extends Component {
 
   handleClick(e) {
     e.preventDefault()
-    api.postComment( this.props.id, this.state.description )
+    api.postComment(this.props.id, this.state.description)
       .then(res => {
         console.log(this.state.description)
         this.props.onSubmit(this.state)
         this.setState({
-          description:" "
+          description: " "
         })
-        
+
       })
       .catch(err => {
         console.log(err);
@@ -37,13 +45,19 @@ class AddComments extends Component {
   render() {
     return (
       <div className="Login">
-        <h2>Post</h2>
-        <form>
-          Description:
-          <textarea type="text" value={this.state.description} onChange={(e) => this.handleInputChange(e)} /> <br />
-          <button onClick={(e) => this.handleClick(e)}>Post</button>
-        </form>
-      </div>
+        <h2>Share you exprinece</h2>
+        <FormGroup row>
+          <Label for="exampleText" sm={4}></Label>
+          <Col sm={4}>
+            <Input
+              type="textarea"
+              value={this.state.description} onChange={(e) => this.handleInputChange(e)}
+
+            />
+          </Col>
+        </FormGroup>
+        <Button color="primary" size="m" onClick={(e) => this.handleClick(e)}>Comment</Button>
+      </div >
     );
   }
 }

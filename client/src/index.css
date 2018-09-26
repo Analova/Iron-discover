@@ -3,3 +3,29 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.Activities .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.Activities .card-subtitle {
+  margin-bottom: 10px;
+}
+
+.Activities .card {
+  cursor: pointer;
+}
+
+.Search {
+  margin: 40px 0;
+}
+
+.Search .row > div {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* .Search input, .Search select {
+  border: 2px solid #007bff;
+} */

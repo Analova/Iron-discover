@@ -63,6 +63,12 @@ export default {
       .then(res => res.data)
       .catch(errHandler);
   },
+  editComment(id, data) {
+    return service
+      .patch(`/comments/${id}`, data)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
 
   // Sing up Log in
   signup(userInfo) {
