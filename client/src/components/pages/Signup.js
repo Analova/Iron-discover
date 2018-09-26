@@ -49,7 +49,7 @@ class Signup extends Component {
           <Label for="exampleName" sm={4}>Username</Label>
           <Col sm={4}>
             <Input
-              input type="text" value={this.state.username}
+              input type="text" name="username" value={this.state.username}
               onChange={(e) => this.handleInputChange("username", e)}
             />
           </Col>
@@ -59,7 +59,7 @@ class Signup extends Component {
           <Label for="exampleName" sm={4}>Password</Label>
           <Col sm={4}>
             <Input
-              input type="password" value={this.state.password}
+              input type="password" name="password" value={this.state.password}
               onChange={(e) => this.handleInputChange("password", e)}
             />
           </Col>

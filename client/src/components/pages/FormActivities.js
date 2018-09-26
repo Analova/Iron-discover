@@ -29,7 +29,6 @@ class FormActivities extends Component {
   componentDidMount() {
     api.profileActivity(this.props.match.params.id)
       .then((activity) => {
-        console.log(activity)
         this.setState({
           name: activity.activity.name,
           category: activity.activity.category,

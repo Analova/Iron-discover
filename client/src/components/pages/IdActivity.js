@@ -5,6 +5,7 @@ import { Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {
   Button,
+  Container
 } from 'reactstrap';
 
 
@@ -14,19 +15,15 @@ class idActivity extends Component {
     this.state = {
       activity: {},
       comments: [],
-      like: 0
     }
   }
 
 
-
   handleOnSubmit(newComment) {
-    console.log("COMMENT", this.state.comments)
     this.setState({ comments: [...this.state.comments, newComment] })
   }
 
   handleDelete(id) {
-    console.log("handleDelete")
     api.deleteComment(id)
       .then(data => {
         if (data.success) {
@@ -35,49 +32,48 @@ class idActivity extends Component {
           })
         }
       })
-
   }
 
-
-  handleClick(data) {
-    this.setState({
-      like: this.state.like + 1
-    })
-
+  handleClick() {
+    this.props.history.push('/activities/')
   }
 
   render() {
-    console.log("STATE", this.state.comments)
     return (
       <div>
-        <Media style={{ margin: 20 }}>
-          <Media left href="#">
-            <img src={this.state.activity.picture} style={{ height: 400, width: 400, objectFit: "cover", margin: 20 }} />
-            <Media />
-          </Media>
-          <Media body>
-            <Media heading>
-              {this.state.activity.name}
+        <Container>
+          <Media >
+            <Media left href="#" style={{ margin: 20 }} onClick={e => this.handleClick()}>
+              <img src={this.state.activity.picture} style={{ height: 400, width: 400, objectFit: "cover", margin: 20 }} />
+              <Media />
             </Media>
-            <strong>Category: </strong> {this.state.activity.category} <br></br>
-            <strong>Description: </strong>{this.state.activity.description}
+            <Media body>
+              <Media heading>
+                {this.state.activity.name}
+              </Media>
+              <strong>Category: </strong> {this.state.activity.category} <br></br>
+              <strong>Description: </strong>{this.state.activity.description}
+            </Media>
           </Media>
-        </Media>
-        <Button onClick={e => this.handleClick('like')}>Like{this.state.like}</Button>
-        <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>
-        <AddComments onSubmit={e => this.handleOnSubmit(e)} id={this.props.match.params.id} />
-        {
-          this.state.comments.map((c) => <p key={c._id}>{c.description}
-            <Button onClick={e => this.handleDelete(c._id)}>Delete</Button>
-            <Link to={`/comments/${this.state.comments._id}/edit`} >Edit</Link>
-          </p>
-          )
-        }
+          <br />
+          {this.state.currentUser === this.state.activity._owner &&
+            <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>}
+          <AddComments onSubmit={e => this.handleOnSubmit(e)} id={this.props.match.params.id} />
+          {
+            this.state.comments.map((c, i) => <p key={i}>{c.description}
+              <br />
+              <Button onClick={e => this.handleDelete(c._id)}>Delete</Button>
+            </p>
+            )
+          }
+        </Container>
       </div >
     );
   }
 
   componentDidMount() {
+    let user = api.loadUser()
+    this.setState({ currentUser: user._id })
     api.profileActivity(this.props.match.params.id)
       .then(res => {
         this.setState({ activity: res.activity, comments: res.comments })

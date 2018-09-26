@@ -10,7 +10,6 @@ import Activities from './pages/Activities'
 import Profile from './pages/Profile'
 import IdActivity from "./pages/IdActivity"
 import FormActivities from './pages/FormActivities';
-import EditComment from "./pages/EditComment"
 import NavBar from "./pages/NavBar"
 
 
@@ -37,7 +36,6 @@ class App extends Component {
           <Route path="/activity/:id/edit" component={FormActivities} />
           <Route path="/activity/:id" component={IdActivity} />
           <Route path="/activity/:id/add-comment" component={IdActivity} />
-          <Route path="/comments/:id/edit" component={EditComment} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
       </div>

@@ -33,13 +33,10 @@ export default class IronNavbar extends Component {
     return (
       <Navbar className="IronNavbar" color="primary" dark expand="sm">
         <Container>
-          <NavbarBrand tag={Link} to="/">Discover</NavbarBrand>
+          <NavbarBrand tag={Link} to="/activities">Discover</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink className={"nav-link"} to="/activities">Activities</NavLink>
-              </NavItem>
               <NavItem>
                 {api.isLoggedIn() && <NavLink className={"nav-link"} to="/add-activity">Add activity</NavLink>}
               </NavItem>

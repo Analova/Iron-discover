@@ -27,7 +27,6 @@ class Activities extends Component {
   }
 
   handleDlete(id) {
-    console.log("handledlete")
     api.deleteActivity(id)
       .then(data => {
         if (data.success) {
@@ -40,7 +39,6 @@ class Activities extends Component {
   }
 
   handleClick(activityId) {
-    console.log(activityId);
     this.props.history.push('/activity/' + activityId)
 
   }

@@ -45,7 +45,6 @@ class AddActivity extends Component {
     }
     api.postActivity(data)
       .then(result => {
-        console.log('SUCCESS!')
         this.setState({
           name: "",
           picture: "",
@@ -55,7 +54,7 @@ class AddActivity extends Component {
         this.props.history.push("/activities")
       })
       .catch(err => {
-        console.log('ERROR')
+        console.log('ERROR: ', err)
       })
   }
   render() {

@@ -29,16 +29,14 @@ class AddComments extends Component {
     e.preventDefault()
     api.postComment(this.props.id, this.state.description)
       .then(res => {
-        console.log(this.state.description)
-        this.props.onSubmit(this.state)
+        this.props.onSubmit(res.comment)
         this.setState({
           description: " "
         })
 
       })
       .catch(err => {
-        console.log(err);
-        console.log('ERROR')
+        console.log('ERROR: ', err)
       })
   }
 
@@ -52,7 +50,6 @@ class AddComments extends Component {
             <Input
               type="textarea"
               value={this.state.description} onChange={(e) => this.handleInputChange(e)}
-
             />
           </Col>
         </FormGroup>

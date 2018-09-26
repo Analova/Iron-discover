@@ -30,7 +30,6 @@ export default {
   },
 
   profileActivity(id) {
-    console.log("called from console")
     return service
       .get(`/activities/${id}`)
       .then(res => res.data)
@@ -63,12 +62,6 @@ export default {
       .then(res => res.data)
       .catch(errHandler);
   },
-  editComment(id, data) {
-    return service
-      .patch(`/comments/${id}`, data)
-      .then(res => res.data)
-      .catch(errHandler)
-  },
 
   // Sing up Log in
   signup(userInfo) {
@@ -97,16 +90,12 @@ export default {
       .get('/logout')
   },
 
-  // loadUser() {
-  //   const userData = localStorage.getItem('user');
-  //   if (!userData) return false;
-  //   const user = JSON.parse(userData);
-  //   if (user.token) {
-  //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + user.token;
-  //     return user;
-  //   }
-  //   return false;
-  // },
+  loadUser() {
+    const userData = localStorage.getItem('user');
+    if (!userData) return false;
+    const user = JSON.parse(userData);
+    return user;
+  },
 
   isLoggedIn() {
     return localStorage.getItem('user') != null
