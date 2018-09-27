@@ -33,7 +33,8 @@ body {
   margin-top:20px;
 }
 
- /* textarea.form-control {
+.Form textarea.form-control{
   width:400px;
-  height:800px
-} */
+  height:100px;
+}
+

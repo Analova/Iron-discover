@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import api from '../../api'
 import AddComments from "./AddComments"
-import { Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {
+  Media,
   Button,
   Container,
   Row,
@@ -38,44 +38,46 @@ class idActivity extends Component {
 
 
   render() {
+    console.log("COMMENTS", this.state.comments)
     return (
       <div>
-        <Container style={{ margin: 20 }} >
-          <Media >
-            <Media left href="#">
-              <img src={this.state.activity.picture} style={{ height: 400, width: 400, objectFit: "cover" }} />
-              <Media />
-            </Media>
-            <Media body>
-              <Media heading>
-                {this.state.activity.name}
-              </Media>
-              <strong>Category: </strong> {this.state.activity.category} <br></br>
-              <strong>Description: </strong>{this.state.activity.description}
-            </Media>
-          </Media>
-          <Container>
-            <Row className="Form">
-              <Col sm={6}>
-                <br />
-                {this.state.currentUser === this.state.activity._owner &&
-                  <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>}
-                <AddComments onSubmit={e => this.handleOnSubmit(e)} id={this.props.match.params.id} />
-              </Col>
-              <Col sm={5}>
-                <h1>View all comments</h1>
-                {
-                  this.state.comments.map((c, i) => <p key={i}>{c.description}
-                    <br />
-                    {this.state.currentUser === c._owner &&
-                      <Button onClick={e => this.handleDelete(c._id)}>Delete</Button>}
-                  </p>
-                  )
-                }
-              </Col>
-            </Row>
+        <Container>
+          <Row className="align-items-center">
+            <Col md="4">
+              <img className="img-fluid" src={this.state.activity.picture} style={{ objectFit: "cover" }} />
+            </Col>
+            <Col md="8">
+              <h2>{this.state.activity.name}</h2>
+              <p><strong>Category: </strong> {this.state.activity.category} </p>
+              <p><strong>Description: </strong>{this.state.activity.description}</p>
+            </Col>
+          </Row>
+          <Row >
+            <Col md="12">
+              <br />
+              {this.state.currentUser === this.state.activity._owner &&
+                <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>}
+              <AddComments onSubmit={e => this.handleOnSubmit(e)} id={this.props.match.params.id} />
+            </Col>
+            <Col>
+              {
+                this.state.comments.map((c, i) => <h4 key={i}>
+                  {c._owner.username}
+                  <br />
+                  {c.description}
 
-          </Container>
+                  < br />
+                  {
+                    this.state.currentUser === c._owner._id &&
+                    <Button onClick={e => this.handleDelete(c._id)}>Delete</Button>
+                  }
+                </h4>
+                )
+              }
+
+            </Col>
+          </Row>
+
 
         </Container>
       </div >

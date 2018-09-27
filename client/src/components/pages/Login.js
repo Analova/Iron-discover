@@ -15,7 +15,8 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      message: ""
+      message: "",
+      visible: true
     }
     this.onDismiss = this.onDismiss.bind(this);
   }
@@ -28,7 +29,7 @@ class Login extends Component {
   handleInputChange(stateFieldName, event) {
     this.setState({
       [stateFieldName]: event.target.value,
-      message: ""
+      // message: ""
     })
   }
 
@@ -71,8 +72,8 @@ class Login extends Component {
           </Col>
         </FormGroup>
 
-        <FormGroup>
-          <Col className="text-center" sm={4}>
+        <FormGroup row>
+          <Col sm={4}>
             {this.state.message && (
               <Alert
                 color="danger"

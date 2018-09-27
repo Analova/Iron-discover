@@ -15,7 +15,6 @@ class Signup extends Component {
     super(props)
     this.state = {
       username: "",
-      name: "",
       password: "",
       message: "",
       visible: true
@@ -39,7 +38,6 @@ class Signup extends Component {
     e.preventDefault()
     let data = {
       username: this.state.username,
-      name: this.state.name,
       password: this.state.password,
     }
     api
@@ -80,7 +78,7 @@ class Signup extends Component {
           </Col>
         </FormGroup>
 
-        <Form>
+        <FormGroup row>
           <Label ></Label>
           <Col className="text-center" sm={4}>
             {this.state.message && (
@@ -93,7 +91,8 @@ class Signup extends Component {
               </Alert>
             )}
           </Col>
-        </Form>
+        </FormGroup>
+
         <Button color="primary" onClick={(e) => this.handleClick(e)}>Signup</Button>
       </div>
     );

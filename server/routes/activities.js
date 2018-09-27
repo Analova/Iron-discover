@@ -32,6 +32,7 @@ router.get('/:id', (req, res, next) => {
   Activity.findById(req.params.id)
     .then(activity => {
       Comment.find({ _activity: req.params.id })
+        .populate("_owner")
         .then(
           comments => {
             res.json({
@@ -53,6 +54,7 @@ router.post("/:id/comments", isLoggedIn, (req, res, next) => {
 
   Comment.create({ description, _activity, _owner })
     .then(comment => {
+      comment._owner = req.user
       res.json({
         success: true,
         comment
@@ -60,7 +62,6 @@ router.post("/:id/comments", isLoggedIn, (req, res, next) => {
     })
     .catch(err => next(err))
 })
-
 
 
 //Update
