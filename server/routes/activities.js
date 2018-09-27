@@ -81,20 +81,20 @@ router.patch("/:id", (req, res) => {
     })
 })
 
-// Delete an activity
-router.delete("/:id", (req, res, next) => {
-  Activity.findByIdAndRemove(req.params.id)
-    .then(() => {
-      res.json({
-        success: true,
-      })
-    })
-    .catch(error => {
-      return {
-        success: false,
-        error: err
-      }
-    })
-})
+// // Delete an activity
+// router.delete("/:id", (req, res, next) => {
+//   Activity.findByIdAndRemove(req.params.id)
+//     .then(() => {
+//       res.json({
+//         success: true,
+//       })
+//     })
+//     .catch(error => {
+//       return {
+//         success: false,
+//         error: err
+//       }
+//     })
+// })
 
 module.exports = router;

@@ -51,7 +51,7 @@ class AddActivity extends Component {
           description: "",
           category: "",
         })
-        this.props.history.push("/activities")
+        this.props.history.push("/")
       })
       .catch(err => {
         console.log('ERROR: ', err)

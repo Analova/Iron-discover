@@ -14,6 +14,7 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
+      message: ""
     }
   }
 
@@ -28,10 +29,13 @@ class Login extends Component {
     api.login(this.state.username, this.state.password)
       .then(result => {
         console.log('SUCCESS!')
-        this.props.history.push("/activities") // Redirect to the home page
+        this.props.history.push("/") // Redirect to the home page
       })
       .catch(err => {
         console.log('ERROR')
+        this.setState({
+          message: "Please sign up "
+        })
       })
   }
 
@@ -57,6 +61,10 @@ class Login extends Component {
               onChange={(e) => this.handleInputChange("password", e)}
             />
           </Col>
+        </FormGroup>
+
+        <FormGroup row>
+          {this.state.message && this.state.message}
         </FormGroup>
 
         <Button color="primary" onClick={(e) => this.handleClick(e)}>Login</Button>

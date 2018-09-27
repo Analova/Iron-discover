@@ -33,7 +33,7 @@ export default class IronNavbar extends Component {
     return (
       <Navbar className="IronNavbar" color="primary" dark expand="sm">
         <Container>
-          <NavbarBrand tag={Link} to="/activities">Discover</NavbarBrand>
+          <NavbarBrand tag={Link} to="/">Discover</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

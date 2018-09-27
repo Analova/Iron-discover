@@ -15,6 +15,7 @@ class Signup extends Component {
       username: "",
       name: "",
       password: "",
+      message: ""
     }
   }
 
@@ -31,13 +32,17 @@ class Signup extends Component {
       name: this.state.name,
       password: this.state.password,
     }
-    api.signup(data)
+    api
+      .signup(data)
       .then(result => {
         console.log('SUCCESS!')
         this.props.history.push("/login") // Redirect to the login page
       })
       .catch(err => {
         console.log('ERROR')
+        this.setState({
+          message: "The username already exists"
+        })
       })
   }
 
@@ -65,6 +70,9 @@ class Signup extends Component {
           </Col>
         </FormGroup>
 
+        <FormGroup row>
+          {this.state.message && this.state.message}
+        </FormGroup>
         <Button color="primary" onClick={(e) => this.handleClick(e)}>Signup</Button>
       </div>
     );

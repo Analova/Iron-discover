@@ -55,7 +55,7 @@ class idActivity extends Component {
             </Media>
           </Media>
           <Container>
-            <Row>
+            <Row className="Form">
               <Col sm={6}>
                 <br />
                 {this.state.currentUser === this.state.activity._owner &&
@@ -67,7 +67,7 @@ class idActivity extends Component {
                 {
                   this.state.comments.map((c, i) => <p key={i}>{c.description}
                     <br />
-                    {this.state.currentUser === this.state.comments._owner &&
+                    {this.state.currentUser === c._owner &&
                       <Button onClick={e => this.handleDelete(c._id)}>Delete</Button>}
                   </p>
                   )

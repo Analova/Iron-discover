@@ -29,6 +29,8 @@ const Search = (props) => {
               <option value="museums">Museums</option>
               <option value="food">Food</option>
               <option value="history">History</option>
+              <option value="sightseeing">Sightseeing</option>
+              <option value="sport">Sport</option>
             </Input>
           </Col>
 
