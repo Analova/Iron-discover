@@ -6,6 +6,7 @@ import {
   FormGroup,
   Input,
   Label,
+  Alert,
 } from 'reactstrap';
 
 class Login extends Component {
@@ -16,11 +17,18 @@ class Login extends Component {
       password: "",
       message: ""
     }
+    this.onDismiss = this.onDismiss.bind(this);
   }
+
+  onDismiss() {
+    this.setState({ visible: false });
+  }
+
 
   handleInputChange(stateFieldName, event) {
     this.setState({
-      [stateFieldName]: event.target.value
+      [stateFieldName]: event.target.value,
+      message: ""
     })
   }
 
@@ -34,7 +42,7 @@ class Login extends Component {
       .catch(err => {
         console.log('ERROR')
         this.setState({
-          message: "Please sign up "
+          message: "Please signup "
         })
       })
   }
@@ -63,8 +71,18 @@ class Login extends Component {
           </Col>
         </FormGroup>
 
-        <FormGroup row>
-          {this.state.message && this.state.message}
+        <FormGroup>
+          <Col className="text-center" sm={4}>
+            {this.state.message && (
+              <Alert
+                color="danger"
+                isOpen={this.state.visible}
+                toggle={this.onDismiss}
+              >
+                {this.state.message}
+              </Alert>
+            )}
+          </Col>
         </FormGroup>
 
         <Button color="primary" onClick={(e) => this.handleClick(e)}>Login</Button>
