@@ -54,23 +54,28 @@ class idActivity extends Component {
               <strong>Description: </strong>{this.state.activity.description}
             </Media>
           </Media>
-
-          <Row>
-            <Col sm={6}>
-              <br />
-              {this.state.currentUser === this.state.activity._owner &&
-                <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>}
-              <AddComments onSubmit={e => this.handleOnSubmit(e)} id={this.props.match.params.id} />
-            </Col>
-            {
-              this.state.comments.map((c, i) => <p key={i}>{c.description}
+          <Container>
+            <Row>
+              <Col sm={6}>
                 <br />
-                {this.state.currentUser === this.state.comments._owner &&
-                  <Button onClick={e => this.handleDelete(c._id)}>Delete</Button>}
-              </p>
-              )
-            }
-          </Row>
+                {this.state.currentUser === this.state.activity._owner &&
+                  <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>}
+                <AddComments onSubmit={e => this.handleOnSubmit(e)} id={this.props.match.params.id} />
+              </Col>
+              <Col sm={6}>
+                <h1>View all comments</h1>
+                {
+                  this.state.comments.map((c, i) => <p key={i}>{c.description}
+                    <br />
+                    {this.state.currentUser === this.state.comments._owner &&
+                      <Button onClick={e => this.handleDelete(c._id)}>Delete</Button>}
+                  </p>
+                  )
+                }
+              </Col>
+            </Row>
+
+          </Container>
 
         </Container>
       </div >

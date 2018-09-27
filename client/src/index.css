@@ -32,3 +32,8 @@ body {
 .Activities h2{
   margin-top:20px;
 }
+
+textarea.form-control {
+  width:400px;
+  height:800px
+}
