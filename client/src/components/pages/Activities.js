@@ -47,12 +47,13 @@ class Activities extends Component {
     return (
       <Container ontainer className="Activities" >
         <h2>What do you want to do today?</h2>
-        <Search search={this.state.search} onChange={(e) => { this.setState({ search: e.target.value }) }} />
+        <Search search={this.state.search}
+          category={this.state.category}
+          onChange={(e) => { this.setState({ search: e.target.value }) }} />
         <Row>
           {this.state.activities
             .filter((el, i) =>
               el.category.toUpperCase().indexOf(this.state.search.toUpperCase()) !== -1
-
             )
             .map(a =>
               <Col sm="6" lg="4">

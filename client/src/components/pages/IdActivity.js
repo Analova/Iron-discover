@@ -62,7 +62,7 @@ class idActivity extends Component {
                   <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>}
                 <AddComments onSubmit={e => this.handleOnSubmit(e)} id={this.props.match.params.id} />
               </Col>
-              <Col sm={6}>
+              <Col sm={5}>
                 <h1>View all comments</h1>
                 {
                   this.state.comments.map((c, i) => <p key={i}>{c.description}
