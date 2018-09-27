@@ -45,12 +45,15 @@ class Activities extends Component {
 
   render() {
     return (
-      <Container className="Activities">
+      <Container ontainer className="Activities" >
         <h2>What do you want to do today?</h2>
         <Search search={this.state.search} onChange={(e) => { this.setState({ search: e.target.value }) }} />
         <Row>
           {this.state.activities
-            .filter((el, i) => el.name.toUpperCase().indexOf(this.state.search.toUpperCase()) !== -1)
+            .filter((el, i) =>
+              el.category.toUpperCase().indexOf(this.state.search.toUpperCase()) !== -1
+
+            )
             .map(a =>
               <Col sm="6" lg="4">
                 <Card onClick={e => this.handleClick(a._id)}>

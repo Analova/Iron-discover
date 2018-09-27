@@ -43,13 +43,14 @@ class AddComments extends Component {
   render() {
     return (
       <div className="Login">
-        <h2>Share you exprinece</h2>
+        <h2>Comment</h2>
         <FormGroup row>
           <Label for="exampleText" sm={4}></Label>
           <Col sm={4}>
             <Input
               type="textarea"
               value={this.state.description} onChange={(e) => this.handleInputChange(e)}
+              placeholder="Place your comment"
             />
           </Col>
         </FormGroup>

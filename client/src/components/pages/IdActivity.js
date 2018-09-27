@@ -5,7 +5,9 @@ import { Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import {
   Button,
-  Container
+  Container,
+  Row,
+  Col
 } from 'reactstrap';
 
 
@@ -34,17 +36,14 @@ class idActivity extends Component {
       })
   }
 
-  handleClick() {
-    this.props.history.push('/activities/')
-  }
 
   render() {
     return (
       <div>
-        <Container>
+        <Container style={{ margin: 20 }} >
           <Media >
-            <Media left href="#" style={{ margin: 20 }} onClick={e => this.handleClick()}>
-              <img src={this.state.activity.picture} style={{ height: 400, width: 400, objectFit: "cover", margin: 20 }} />
+            <Media left href="#">
+              <img src={this.state.activity.picture} style={{ height: 400, width: 400, objectFit: "cover" }} />
               <Media />
             </Media>
             <Media body>
@@ -55,17 +54,24 @@ class idActivity extends Component {
               <strong>Description: </strong>{this.state.activity.description}
             </Media>
           </Media>
-          <br />
-          {this.state.currentUser === this.state.activity._owner &&
-            <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>}
-          <AddComments onSubmit={e => this.handleOnSubmit(e)} id={this.props.match.params.id} />
-          {
-            this.state.comments.map((c, i) => <p key={i}>{c.description}
+
+          <Row>
+            <Col sm={6}>
               <br />
-              <Button onClick={e => this.handleDelete(c._id)}>Delete</Button>
-            </p>
-            )
-          }
+              {this.state.currentUser === this.state.activity._owner &&
+                <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>}
+              <AddComments onSubmit={e => this.handleOnSubmit(e)} id={this.props.match.params.id} />
+            </Col>
+            {
+              this.state.comments.map((c, i) => <p key={i}>{c.description}
+                <br />
+                {this.state.currentUser === this.state.comments._owner &&
+                  <Button onClick={e => this.handleDelete(c._id)}>Delete</Button>}
+              </p>
+              )
+            }
+          </Row>
+
         </Container>
       </div >
     );

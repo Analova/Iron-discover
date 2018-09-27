@@ -19,14 +19,14 @@ const Search = (props) => {
             />
           </Col>
 
-          <Col sm={5}>
+          {/* <Col sm={5}>
             <Input type="select" name="category">
               <option value="">Change a category</option>
               <option value="cruises">Cruises</option>
               <option value="museums">Museums</option>
               <option value="food">Food</option>
             </Input>
-          </Col>
+          </Col> */}
 
         </FormGroup>
       </Form>
