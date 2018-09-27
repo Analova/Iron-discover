@@ -3,6 +3,7 @@ import api from '../../api'
 import AddComments from "./AddComments"
 import { Link } from 'react-router-dom';
 import {
+  Card, CardText, CardTitle,
   Media,
   Button,
   Container,
@@ -40,47 +41,42 @@ class idActivity extends Component {
   render() {
     console.log("COMMENTS", this.state.comments)
     return (
-      <div>
-        <Container>
-          <Row className="align-items-center">
-            <Col md="4">
-              <img className="img-fluid" src={this.state.activity.picture} style={{ objectFit: "cover" }} />
-            </Col>
-            <Col md="8">
-              <h2>{this.state.activity.name}</h2>
-              <p><strong>Category: </strong> {this.state.activity.category} </p>
-              <p><strong>Description: </strong>{this.state.activity.description}</p>
-            </Col>
-          </Row>
-          <Row >
-            <Col md="12">
-              <br />
-              {this.state.currentUser === this.state.activity._owner &&
-                <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>}
-              <AddComments onSubmit={e => this.handleOnSubmit(e)} id={this.props.match.params.id} />
-            </Col>
-            <Col>
-              {
-                this.state.comments.map((c, i) => <h4 key={i}>
-                  {c._owner.username}
-                  <br />
-                  {c.description}
-
-                  < br />
+      <Container>
+        <Row className="align-items-center">
+          <Col md="4">
+            <img className="img-fluid" src={this.state.activity.picture} style={{ objectFit: "cover" }} />
+          </Col>
+          <Col md="8">
+            <h2>{this.state.activity.name}</h2>
+            <p><strong>Category: </strong> {this.state.activity.category} </p>
+            <p><strong>Description: </strong>{this.state.activity.description}</p>
+          </Col>
+        </Row>
+        <Row >
+          <Col md="12">
+            <br />
+            {this.state.currentUser === this.state.activity._owner &&
+              <Link to={`/activity/${this.state.activity._id}/edit`} >Edit</Link>}
+            <AddComments onSubmit={e => this.handleOnSubmit(e)} id={this.props.match.params.id} />
+          </Col>
+        </Row>
+        {
+          this.state.comments.map((c, i) =>
+            <div key={i} className="card-container" >
+              <Card className="card-comment">
+                <CardTitle>{c.description} </CardTitle>
+                <CardText>Published by {c._owner.username}</CardText>
+                <CardText>
                   {
                     this.state.currentUser === c._owner._id &&
                     <Button onClick={e => this.handleDelete(c._id)}>Delete</Button>
                   }
-                </h4>
-                )
-              }
-
-            </Col>
-          </Row>
-
-
-        </Container>
-      </div >
+                </CardText>
+              </Card>
+            </div >
+          )
+        }
+      </Container>
     );
   }
 
@@ -94,5 +90,6 @@ class idActivity extends Component {
       )
   }
 }
+
 
 export default idActivity;

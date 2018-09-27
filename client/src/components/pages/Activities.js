@@ -46,7 +46,7 @@ class Activities extends Component {
   render() {
     return (
       <Container ontainer className="Activities" >
-        <h2>What do you want to do discover today?</h2>
+        <h2>What do you want to discover today?</h2>
         <Search search={this.state.search}
           category={this.state.category}
           onChange={(e) => { this.setState({ search: e.target.value }) }} />

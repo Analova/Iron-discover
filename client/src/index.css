@@ -26,9 +26,10 @@ body {
   padding-bottom: 10px;
 }
 
-/* .Search input, .Search select {
+.Search input, .Search select {
   border: 2px solid #007bff;
-} */
+}
+
 .Activities h2{
   margin-top:20px;
 }
@@ -38,3 +39,12 @@ body {
   height:100px;
 }
 
+.card-comment{
+  padding: 10px;
+  text-align: left
+}
+
+.card-container{
+margin-top: 20px
+
+}
